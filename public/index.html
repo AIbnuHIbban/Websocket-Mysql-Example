@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Websocket Mysql</title>
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 </head>
@@ -15,7 +14,6 @@
 
     <script>
         $(document).ready(function(){
-            // Connect to our node/websockets server
             var socket = io.connect('http://localhost:3000');
 
             socket.on('initial students', function(data){
@@ -31,18 +29,15 @@
                 $('#students').append('<li>' + data.name + ' '+ data.gender +'</li>')
             })
 
-            // New socket connected, display new count on page
             socket.on('user online', function(data){
                 $('#usersConnected').html('Jumlah User Online: ' + data)
             })
 
-            // Add a new (random) note, emit to server to let others know
             $('#newStudent').click(function(){
                 var name_student = 'Abdullah Ibnu Hibban'
                 var gender = 'Laki - laki'
                 socket.emit('new student', {name: name_student, gender: gender})
             })
-
 
         })
     </script>
